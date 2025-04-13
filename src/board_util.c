@@ -7,7 +7,6 @@
 board_vals* init_board_vals(bool init_val) {
     board_vals *board = (board_vals*)calloc(1, sizeof(board_vals));
     if (board == NULL) {
-        // Handle memory allocation failure
         printf("Memory allocation failed!\n");
         return NULL;
     }
@@ -23,6 +22,23 @@ board_vals* init_board_vals(bool init_val) {
     }
 
     return board;
+}
+
+board_vals* copy_board_vals(board_vals* orig) {
+    board_vals *copy = (board_vals*)malloc(sizeof(board_vals));
+    if (copy == NULL) {
+        printf("Memory allocation failed!\n");
+        return NULL;
+    }
+
+    for(int i = 0; i < 9; i++) {
+        for(int j = 0; j < 9; j++) {
+            copy->row_vals[i][j] = orig->row_vals[i][j];
+            copy->col_vals[i][j] = orig->col_vals[i][j];
+            copy->sqr_vals[i][j] = orig->sqr_vals[i][j];
+        }
+    }
+    return copy;
 }
 
 void print_board(int board[9][9]) {
@@ -75,4 +91,11 @@ void undo(board_vals* vals, int board[9][9], int row, int col) {
     vals->row_vals[row][val] = false;
     vals->col_vals[col][val] = false;
     vals->sqr_vals[get_sqr(row, col)][val] = false;
+}
+
+void copy_board(int orig[9][9], int copy[9][9]) {
+    for(int i = 0; i < 9; i++) {
+        for(int j = 0; j < 9; j++)
+            copy[i][j] = orig[i][j];
+    }
 }
