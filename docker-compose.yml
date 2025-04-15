@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  run_sudoku_builder:
+    container_name: run_sudoku_builder
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_USERNAME: ${GIT_USERNAME}
+        GIT_TOKEN: ${GIT_TOKEN}
+    volumes:
+      - .:/app  # Mount the entire project base folder
+    env_file:
+      - .env
+    working_dir: /app  # Set the working directory to '/app'
+    stdin_open: true
+    tty: true
