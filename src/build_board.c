@@ -1,8 +1,6 @@
 #include "../include/build_board.h"
 
 bool fill_cell(board_vals* vals, int board[9][9], int row, int col) {
-    printf("(%d, %d)\n", row, col);
-    
     int first_val = rand() % 9;
 
     for(int i = 0; i < 9; i ++) {
